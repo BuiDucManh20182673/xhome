@@ -1,0 +1,46 @@
+.main-content {
+    .category-col {
+        width: 100%;
+        .tab-list {
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            border-radius: 4px;
+        }
+        .tab-panel {
+            padding: 24px 0;
+            .item-pending {
+                padding: 12px;
+                .MuiTableCell-root {
+                    border-bottom: 0;
+                }
+                .row-requiment {
+                    margin: 10px 0;
+                }
+                .pending {
+                    background-color: #aff8c0;
+                }
+                .processed {
+                    background-color: #f8f6fb;
+                }
+                .btn-confirm {
+                    background-color: #ffe200;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1440px) {
+    .category-col {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 425px) {
+    .row-requiment {
+        .cell {
+            display: block;
+            padding: 6px;
+            font-size: 16px;
+        }
+    }
+}

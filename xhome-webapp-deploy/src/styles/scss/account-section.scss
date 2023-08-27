@@ -1,0 +1,107 @@
+.main-content {
+  .account-col {
+    width: 50%;
+  }
+  .authorization-col {
+    width: 50%;
+  }
+  .btn-update {
+    background-color: #ffe200;
+  }
+}
+.permistion-title{
+    font-weight: bold !important;
+}
+.dialog-container {
+  .dialog-title {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+    & > :nth-child(1) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .btn-close {
+        cursor: pointer;
+      }
+    }
+  }
+  // .dialog-content {
+  // }
+  .dialog-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .btn-create {
+      padding: 6px 25px;
+      background-color: #22953c;
+    }
+    .MuiButton-label {
+      color: #fff;
+    }
+    .btn-cancel {
+      padding: 6px 25px;
+      background-color: #a53f42;
+    }
+  }
+}
+
+@media (max-width: 1440px) {
+  .account-col {
+    width: 50% !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .account-col {
+    width: 100% !important;
+  }
+  .authorization-col {
+    width: 100% !important;
+  }
+}
+@media (max-width: 450px) {
+  .cell-checkbox {
+    padding: 0;
+  }
+}
+@media (max-width: 425px) {
+  .permistion-title {
+    display: none !important;
+  }
+//   .cell-check-all {
+//     margin: 0 10px;
+//   }
+  .account-col {
+    width: 100% !important;
+  }
+  .wrap-table {
+    padding: 10px 0 0 0 !important;
+  }
+  .table-authorization {
+    position: relative;
+    tr {
+      flex-direction: row !important;
+    }
+  }
+  .row-tab {
+    &-name {
+      position: absolute;
+    }
+  }
+  .cell-check-all {
+    padding-top: 30px !important;
+    .MuiTypography-body1 {
+      font-size: 16px;
+    }
+  }
+  .cell-checkbox {
+    padding: 16px;
+    padding-top: 55px !important;
+  }
+}
+@media (max-width: 375px) {
+  .cell-checkbox {
+    padding-left: 16px !important;
+    padding-top: 65px !important;
+    margin: 0 -3px;
+  }
+}

@@ -1,0 +1,22 @@
+/*
+  File chinh giao dien chung cua toan bo ung dung
+*/
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+html,
+#root {
+  height: 100%;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}

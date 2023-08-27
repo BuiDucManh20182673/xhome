@@ -1,0 +1,35 @@
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.search-btn {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 5px;
+}
+
+.MuiInputBase-root.MuiOutlinedInput-root.search-input.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd {
+  padding: 0 0px 0 20px;
+  border-radius: 5px;
+}
+
+.search-input
+  input.MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputAdornedEnd.MuiOutlinedInput-inputAdornedEnd {
+  padding: 0;
+}
+
+th.MuiTableCell-root.MuiTableCell-head {
+  padding: 0;
+}
+
+.MuiContainer-root.MuiContainer-maxWidthLg {
+  padding: 0;
+  max-width: 100% !important;
+}
+.search-input {
+  display: flex;
+}
+// th {
+//   padding: 16px !important;
+//   font-weight: bold !important;
+// }
+.cell-check-all {
+  padding: 16px !important;
+  font-weight: bold !important;
+}

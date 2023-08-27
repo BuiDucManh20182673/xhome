@@ -1,0 +1,61 @@
+.project-container {
+  padding: 0 25px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .inner-container {
+    overflow-y: auto;
+  }
+}
+
+.project-container .inner-container .monthly-project-wrapper {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  .monthly-project-tab {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+  .triple-projects-wrapper {
+    display: flex;
+    flex-direction: column;
+    .project-item {
+      // flex-grow: 1;
+      text-align: center;
+      display: flex;
+      justify-content: space-evenly;
+    }
+    // .project-item:not(:first-child) {
+    // margin-left: 10px;
+    // }
+    .project-item button {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    .project-item button:hover,
+    button:active,
+    button:focus {
+      outline: none;
+    }
+    .project-item img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .project-item .project-title {
+      text-transform: uppercase;
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .project-item {
+    font-size: 13px;
+    gap: 15px;
+  }
+}

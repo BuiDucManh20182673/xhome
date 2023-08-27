@@ -1,0 +1,1407 @@
+openapi: 3.0.0
+info:
+  title: XHome API
+  version: 1.0.0
+  description: This is a sample server for xhome
+  termsOfService: http://example.com/terms/
+  contact:
+    name: Quan
+    email: angelwing1812@gmail.com
+
+servers:
+  - url: /api
+    description: Local development server
+
+tags:
+  - name: Authentication
+    description: All authentication apis.
+  - name: Account
+    description: API to manage accounts.
+  - name: Material
+    description: API to manage materials.
+  - name: Fraction
+    description: API to manage fractions.
+  - name: Agency
+    description: API to manage agencies.
+  - name: Catalog
+    description: API to manage catalogs.
+  - name: Product
+    description: API to manage products.
+  - name: Project
+    description: API to manage projects.
+
+components:
+  examples:
+    min:         
+      value: 1   
+      summary: A sample min value
+    max:
+      value: 200
+      summary: A sample max value
+    adminAccount:
+      value: {"username": "xhome", "password": "xhome"}
+      summary: An admin account.
+    superUserAccount:
+      value: {"username": "userfull", "password": "userfull"}
+      summary: An user account with full permission.
+    normalUserAccount:
+      value: {"username": "user", "password": "user"}
+      summary: An user account with none permission.
+  parameters:
+    id:
+      in: query
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: Id of the component.
+    page:  
+      in: query
+      name: quantity
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The number of items in a collection.
+      examples:
+        min:
+          $ref: '#/components/examples/min'
+        max:
+          $ref: '#/components/examples/max'
+    quantity:
+      in: query
+      name: page
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+      description: The index of page that FE wants to get items.
+      examples:
+        min:
+          $ref: '#/components/examples/min'
+        max:
+          $ref: '#/components/examples/max'
+    name:
+      in: query
+      name: name
+      required: true
+      schema:
+        type: string
+      description: Name of the component.
+    supplier:
+      in: query
+      name: supplier
+      required: true
+      schema:
+        type: string
+      description: Supplier's name of the component.
+    optionalKeyword:
+      in: query
+      name: keyword
+      schema:
+        type: string
+      description: Keyword in some fields of the component.
+    keyword:
+      in: query
+      name: keyword
+      required: true
+      schema:
+        type: string
+      description: Keyword of the name (or type) of the component.
+    materialId:
+      in: query
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: Material id of the component.
+    optionalMaterialId:
+      name: materialId
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+      description: Material id of the component.
+    optionalMaterialName:
+      name: materialName
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Material name of the component.
+    fractionId:
+      in: query
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: Fraction id of the component.
+    optionalFractionId:
+      in: query
+      name: fractionId
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+      description: Fraction id of the component.
+    optionalFractionName:
+      name: fractionName
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Fraction name of the component.
+    agencyId:
+      in: query
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: Agency id of the component.
+    optionalAgencyId:
+      in: query
+      name: agencyId
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+      description: Agency id of the component.
+    optionalAgencyName:
+      name: agencyName
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Agency name of the component.
+    catalogId:
+      in: query
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: Catalog id of the component.
+    optionalCatalogId:
+      in: query
+      name: catalogId
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+      description: Catalog id of the component.
+    optionalCatalogName:
+      name: catalogName
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Catalog name of the component.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: Get token at /auth API
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    NewMaterial:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: new name of the component.
+    Material:
+      allOf:
+        - $ref: '#/components/schemas/NewMaterial'
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          description: Id of the component.
+    NewFraction:
+      allOf:
+        - $ref: '#/components/schemas/NewMaterial'
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          description: Material id which this fraction belongs.
+    AgencyParentId:
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          description: Fraction id which this agency belongs.
+    AgencyInfo:
+      type: object
+      required:
+        - supplier
+        - distributor
+      properties: 
+        supplier:
+          type: string
+          description: Supplier's name
+        distributor:
+          type: object
+          required:
+            - name
+            - email
+            - tel
+          properties:
+            name:
+              type: string
+              description: Distributor's name
+            email:
+              type: string
+              description: Distributor's email
+            tel:
+              type: string
+              description: Distributor's telephone number
+    NewAgency:
+      allOf:
+        - $ref: '#/components/schemas/AgencyParentId'
+        - $ref: '#/components/schemas/AgencyInfo'
+    Agency:
+      allOf:
+        - $ref: '#/components/schemas/AgencyInfo'
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          description: Id of this component.
+    CatalogParentId:
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          description: Agency id which this catalog belongs.
+    CatalogInfo:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Catalog's name
+        imageUrl:
+          type: string
+          description: Image's url of catalog
+    NewCatalog:
+      allOf:
+        - $ref: '#/components/schemas/CatalogParentId'
+        - $ref: '#/components/schemas/CatalogInfo'
+    Catalog:
+      allOf:
+        - $ref: '#/components/schemas/CatalogInfo'
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          description: Id of this component.
+    ProductParentId:
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          description: Catalog id which this product belongs.
+    NewProduct:
+      allOf:
+        - $ref: '#/components/schemas/ProductParentId'
+      required:
+        - name
+        - type
+        - code
+      properties:
+        name:
+          type: string
+          description: Name of product
+        type:
+          type: string
+          description: Type of product
+        code:
+          type: string
+          description: Code of product
+        imageUrl:
+          type: string
+          description: Image's url of product
+        note:
+          type: string
+          description: Note of product
+    MiniProduct:
+      allOf:
+        - $ref: '#/components/schemas/NewProduct'
+      properties:
+        id:
+          description: The id of mini product.
+    ProjectProduct:
+      type: array
+      items:
+        type: object
+        required:
+          - miniProductId
+        properties:
+          miniProductId:
+            type: integer
+            description: Id of mini product in the database.
+          note:
+            type: string
+            description: Product's note.
+          size:
+            type: string
+            description: Product's size.
+          description:
+            type: string
+            description: Product's description.
+    ProjectArea:
+      type: array
+      description: All areas in project.
+      items:
+        type: object
+        required:
+          - name
+          - products
+        properties:
+          name:
+            type: string
+            description: Area's name.
+          products:
+            $ref: '#/components/schemas/ProjectProduct'
+      minItems: 0
+      maxItems: 20
+    NewProject:
+      type: object
+      required:
+        - contractId
+        - customerName
+        - areas
+      properties:
+        contractId:
+          type: string
+          description: Contract code of project.
+        customerName:
+          type: string
+          description: Customer's name.
+        areas:
+          $ref: '#/components/schemas/ProjectArea'
+    UpdateProject:
+      allOf:
+        - $ref: '#/components/schemas/NewProject'
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          description: Id of project.
+    LoginAccount:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          format: password
+    NewAccount:
+      allOf:
+        - $ref: '#/components/schemas/LoginAccount'
+      required:
+        - fullName
+      properties:
+        fullName:
+          type: string
+    UpdateAccount:
+      type: object
+      required:
+        - id
+        - username
+        - fullName
+      properties:
+        id:
+          type: integer
+          description: Id of account.
+        username:
+          type: string
+          description: Username of account.
+        fullName:
+          type: string
+          description: Fullname of account.
+    UpdatePermission:
+      type: object
+      required:
+        - id
+        - alowPermission
+      properties:
+        id:
+          type: integer
+          description: Account id
+        allowPermissions:
+          type: array
+          description: Array of allow permissions
+          items:
+            type: string
+            description: >
+              Must be one of viewMaterial, addMaterial, editMaterial, deleteMaterial, 
+              viewFraction, addFraction, editFraction, deleteFraction,
+              viewAgency, addAgency, editAgency, deleteAgency,
+              viewCatalog, addCatalog, editCatalog, deleteCatalog,
+              viewProduct, addProduct, editProduct, deleteProduct,
+              viewProject, addProject, editProject, deleteProject
+          uniqueItems: true
+    DataImport:
+      type: object
+      required:
+        - name
+        - fraction
+        - supplier
+        - catalog
+        - product
+        - group
+        - miniProduct
+      properties:
+        name:
+          type: array
+          description: Array of material's name
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+        fraction:
+          type: array
+          description: Array of fractions
+          items:
+            type: object
+            properties:
+              fraction:
+                type: string
+              parentIdx:
+                type: integer
+        supplier:
+          type: array
+          description: Array of agencies
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              parentIdx:
+                type: integer
+              distributor:
+                type: string
+        catalog:
+          type: array
+          description: Array of catalogs
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              imageUrl:
+                type: string
+              parentIdx:
+                type: integer
+        product:
+          type: array
+          description: Array of products
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+              parentIdx:
+                type: integer
+        group:
+          type: array
+          description: Array of groups
+          items:
+            type: object
+            properties:
+              group:
+                type: string
+              parentIdx:
+                type: integer
+        miniProduct:
+          type: array
+          description: Array of mini products
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              imageUrl:
+                type: string
+              parentIdx:
+                type: integer
+
+paths:
+  /auth:
+    post:
+      summary: Login to the application.
+      description: Login to the application & get api token.
+      tags: [Authentication]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginAccount'
+            examples:
+              admin:
+                $ref: '#/components/examples/adminAccount'
+              superUser:
+                $ref: '#/components/examples/superUserAccount'
+              normaluser:
+                $ref: '#/components/examples/normalUserAccount'
+      responses:
+        200:
+          description: Successfully login !!!
+        400:
+          description: Wrong password or non-existed user.
+        404:
+          description: Bad params or unknown error.
+
+  /account:
+    get:
+      summary: Get all accounts.
+      description: Get all accounts. **This API only available for admin.**
+      tags: [Account]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+    post:
+      summary: Create new account.
+      description: Create new account. **This API only available for admin.**
+      tags: [Account]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/NewAccount'
+      responses:
+        200:
+          description: Account created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewAccount'
+        404:
+          description: Missing some fields or existed username.
+    put:
+      summary: Update an account.
+      description: Update an account. **This API only available for admin.**
+      tags: [Account]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/UpdateAccount'
+      responses:
+        200:
+          description: An account has been updated.
+    delete:
+      summary: Delete an user account.
+      description: Delete an user account. **This API only available for admin.**
+      tags: [Account]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        200:
+          description: If success is 1, the account has been deleted.
+
+  /account/permission:
+    put:
+      summary: Update permission of account.
+      description: Update permission of account. **This API only available for admin.**
+      tags: [Account]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/UpdatePermission'
+      responses:
+        200:
+          description: Updated.
+  
+  /account/search:
+    get:
+      summary: Search accounts (pagination).
+      description: Search accounts. It will search in fullName and username. **This API only available for admin.**
+      tags: [Account]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/keyword'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+
+  /material:
+    get:
+      summary: Get paging materials.
+      description: Get paging materials.
+      tags: [Material]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+    post:
+      summary: Add new material.
+      description: Add new material.
+      tags: [Material]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/NewMaterial'
+      responses:
+        200:
+          description: Material created.
+    put:
+      summary: Update a material.
+      description: Update a material.
+      tags: [Material]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Material'
+      responses:
+        200:
+          description: Material has been updated.
+    delete:
+      summary: Delete a material.
+      description: Delete a material.
+      tags: [Material]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        200:
+          description: Material has been deleted.
+  
+  /material/all:
+    get:
+      summary: Get all materials.
+      description: Get all materials.
+      tags: [Material]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Success.
+
+  /material/search:
+    get:
+      summary: Search materials by name (pagination).
+      description: Search materials by name (pagination).
+      tags: [Material]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/name'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+
+  /material/search-name:
+    get:
+      summary: Search name of material (pagination) (No duplicate).
+      description: Search name of material (pagination). Get all name (No duplicate).
+      tags: [Material]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/name'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+
+  /material/search-all:
+    get:
+      summary: Search materials by name (get all results).
+      description: Search materials by name (get all results).
+      tags: [Material]
+      parameters: 
+        - $ref: '#/components/parameters/name'
+      responses:
+        200:
+          description: Success.
+
+  /fraction:
+    get:
+      summary: Get paging fractions.
+      description: Get paging fractions.
+      tags: [Fraction]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+    post:
+      summary: Add new fraction.
+      description: Add new fraction.
+      tags: [Fraction]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/NewFraction'
+      responses:
+        200:
+          description: Fraction created.
+    put:
+      summary: Update a fraction.
+      description: Update a fraction.
+      tags: [Fraction]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/NewFraction'
+      responses:
+        200:
+          description: Fraction has been updated.
+    delete:
+      summary: Delete a fraction.
+      description: Delete a fraction.
+      tags: [Fraction]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        200:
+          description: Fraction has been deleted.
+
+  /fraction/name-all:
+    get:
+      summary: Get all fraction name.
+      description: Get all fraction name.
+      tags: [Fraction]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Success.
+
+  /fraction/all:
+    get:
+      summary: Get all fractions.
+      description: Get all fractions.
+      tags: [Fraction]
+      responses:
+        200:
+          description: Success.
+
+  /fraction/search:
+    get:
+      summary: Search fractions by name (pagination).
+      description: Search fractions by name (pagination).
+      tags: [Fraction]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+        - $ref: '#/components/parameters/name'
+      responses:
+        200:
+          description: Success.
+
+  /fraction/search-all:
+    get:
+      summary: Search fractions by name (get all results).
+      description: Search fractions by name (get all results).
+      tags: [Fraction]
+      parameters: 
+        - $ref: '#/components/parameters/name'
+      responses:
+        200:
+          description: Success.
+
+  /fraction/search-name:
+    get:
+      summary: Search name of fraction (pagination) (No duplicate).
+      description: Search name of fraction (pagination). Get all name (No duplicate).
+      tags: [Fraction]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/name'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+
+  /fraction/by-material-id:
+    get:
+      summary: Get fractions by material id (pagination).
+      description: Get fractions by material id (pagination).
+      tags: [Fraction]
+      security:
+        - bearerAuth: []
+      parameters: 
+        - $ref: '#/components/parameters/materialId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+  
+  /fraction/all-by-material-id:
+    get:
+      summary: Get all fractions by material id.
+      description: Get all fractions by material id.
+      tags: [Fraction]
+      security:
+        - bearerAuth: []
+      parameters: 
+        - $ref: '#/components/parameters/materialId'
+      responses:
+        200:
+          description: Success.
+
+  /agency:
+    get:
+      summary: Get paging agencies.
+      description: Get paging agencies.
+      tags: [Agency]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+    post:
+      summary: Add new agency.
+      description: Add new agency.
+      tags: [Agency]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/NewAgency'
+      responses:
+        200:
+          description: Agency created.
+    put:
+      summary: Update an agency.
+      description: Update an agency.
+      tags: [Agency]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Agency'
+      responses:
+        200:
+          description: Agency has been updated.
+    delete:
+      summary: Delete an agency.
+      description: Delete an agency.
+      tags: [Agency]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        200:
+          description: Agency has been deleted.
+  
+  /agency/name-all:
+    get:
+      summary: Get all agency name.
+      description: Get all agency name.
+      tags: [Agency]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Success.
+  
+  /agency/all:
+    get:
+      summary: Get all agencies.
+      description: Get all agencies.
+      tags: [Agency]
+      responses:
+        200:
+          description: Success.
+
+  /agency/search:
+    get:
+      summary: Search agencies by supplier's name (pagination).
+      description: Search agencies by supplier's name (pagination).
+      tags: [Agency]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/supplier'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+        - $ref: '#/components/parameters/optionalFractionId'
+      responses:
+        200:
+          description: Success.
+
+  /agency/search-all:
+    get:
+      summary: Search agencies by supplier's name (get all results).
+      description: Search agencies by supplier's name (get all results).
+      tags: [Agency]
+      parameters: 
+        - $ref: '#/components/parameters/supplier'
+      responses:
+        200:
+          description: Success.
+
+  /agency/search-name:
+    get:
+      summary: Search name of agencies by supplier's name (pagination) (No duplicate).
+      description: Search name of agencies by supplier's name (pagination) (No duplicate).
+      tags: [Agency]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/supplier'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+
+  /agency/by-fraction-id:
+    get:
+      summary: Get agencies by fraction id (pagination).
+      description: Get agencies by fraction id (pagination).
+      tags: [Agency]
+      security:
+        - bearerAuth: []
+      parameters: 
+        - $ref: '#/components/parameters/fractionId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+  
+  /agency/all-by-fraction-id:
+    get:
+      summary: Get all agencies by fraction id.
+      description: Get all agencies by fraction id.
+      tags: [Agency]
+      parameters: 
+        - $ref: '#/components/parameters/fractionId'
+      responses:
+        200:
+          description: Success.
+  
+  /catalog:
+    get:
+      summary: Get paging catalogs.
+      description: Get paging catalogs.
+      tags: [Catalog]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+    post:
+      summary: Add new catalog.
+      description: Add new catalog.
+      tags: [Catalog]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/NewCatalog'
+      responses:
+        200:
+          description: Catalog created.
+    put:
+      summary: Update a catalog.
+      description: Update a catalog.
+      tags: [Catalog]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Catalog'
+      responses:
+        200:
+          description: Catalog has been updated.
+    delete:
+      summary: Delete a catalog.
+      description: Delete a catalog.
+      tags: [Catalog]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        200:
+          description: Catalog has been deleted.
+  
+  /catalog/name-all:
+    get:
+      summary: Get all catalog name.
+      description: Get all catalog name.
+      tags: [Catalog]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Success.
+
+  /catalog/all:
+    get:
+      summary: Get all catalogs.
+      description: Get all catalogs.
+      tags: [Catalog]
+      responses:
+        200:
+          description: Success.
+
+  /catalog/search:
+    get:
+      summary: Search catalogs by keyword (pagination).
+      description: Search catalogs by keyword (pagination). It will search in name field.
+      tags: [Catalog]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/keyword'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+
+  /catalog/search-all:
+    get:
+      summary: Search catalogs by keyword (get all results).
+      description: Search catalogs by keyword (get all results). It will search in name field.
+      tags: [Catalog]
+      parameters: 
+        - $ref: '#/components/parameters/keyword'
+      responses:
+        200:
+          description: Success.
+
+  /catalog/search-name:
+    get:
+      summary: Search name of catalog (pagination) (No duplicate).
+      description: Search name of catalog (pagination). Get all name (No duplicate).
+      tags: [Catalog]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/name'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+
+  /catalog/by-agency-id:
+    get:
+      summary: Get catalogs by agency id (pagination).
+      description: Get catalogs by agency id (pagination).
+      tags: [Catalog]
+      security:
+        - bearerAuth: []
+      parameters: 
+        - $ref: '#/components/parameters/agencyId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+  
+  /catalog/all-by-agency-id:
+    get:
+      summary: Get all catalogs by agency id.
+      description: Get all catalogs by agency id.
+      tags: [Catalog]
+      parameters: 
+        - $ref: '#/components/parameters/agencyId'
+      responses:
+        200:
+          description: Success.
+
+  /product:
+    get:
+      summary: Get paging products.
+      description: Get paging products.
+      tags: [Product]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+    post:
+      summary: Add new product.
+      description: Add new product.
+      tags: [Product]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/NewProduct'
+      responses:
+        200:
+          description: Product created.
+    put:
+      summary: Update a product.
+      description: Update a product.
+      tags: [Product]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/MiniProduct'
+      responses:
+        200:
+          description: Product has been updated.
+    delete:
+      summary: Delete a code from product.
+      description: Delete a code from product.
+      tags: [Product]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        200:
+          description: Mini product has been deleted.
+
+  /product/all:
+    get:
+      summary: Get all products.
+      description: Get all products.
+      tags: [Product]
+      responses:
+        200:
+          description: Success. Value of count is total mini products (not products) !!!
+
+  /product/search:
+    get:
+      summary: Search products by keyword (pagination).
+      description: Search products by keyword (pagination).
+      tags: [Product]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/optionalKeyword'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+        - $ref: '#/components/parameters/optionalMaterialId'
+        - $ref: '#/components/parameters/optionalFractionId'
+        - $ref: '#/components/parameters/optionalAgencyId'
+        - $ref: '#/components/parameters/optionalCatalogId'
+        - $ref: '#/components/parameters/optionalMaterialName'
+        - $ref: '#/components/parameters/optionalFractionName'
+        - $ref: '#/components/parameters/optionalAgencyName'
+        - $ref: '#/components/parameters/optionalCatalogName'
+      responses:
+        200:
+          description: Success.
+
+  /product/search-all:
+    get:
+      summary: Search products by code (get all results).
+      description: Search products by code (get all results).
+      tags: [Product]
+      parameters: 
+        - $ref: '#/components/parameters/keyword'
+      responses:
+        200:
+          description: Success.
+
+  /product/by-catalog-id:
+    get:
+      summary: Get products by catalog id (pagination).
+      description: Get products by catalog id (pagination).
+      tags: [Product]
+      security:
+        - bearerAuth: []
+      parameters: 
+        - $ref: '#/components/parameters/catalogId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+  
+  /product/all-by-catalog-id:
+    get:
+      summary: Get all products by catalog id.
+      description: Get all products by catalog id.
+      tags: [Product]
+      parameters: 
+        - $ref: '#/components/parameters/catalogId'
+      responses:
+        200:
+          description: Success.
+
+  /product/import:
+    post:
+      summary: Create multiple products by data importing.
+      description: Create multiple products by data importing.
+      tags: [Product]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/DataImport'
+      responses:
+        200:
+          description: Success.
+
+  /project:
+    get:
+      summary: Get paging projects.
+      description: Get paging projects.
+      tags: [Project]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/quantity'
+      responses:
+        200:
+          description: Success.
+    post:
+      summary: Add new project.
+      description: Add new project.
+      tags: [Project]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/NewProject'
+      responses:
+        200:
+          description: Project created.
+    put:
+      summary: Update a project.
+      description: Update a project.
+      tags: [Project]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/UpdateProject'
+      responses:
+        200:
+          description: Project has been updated.
+    delete:
+      summary: Delete a project.
+      description: Delete a project.
+      tags: [Project]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        200:
+          description: Project has been deleted.
+
+  /project/by-id:
+    get:
+      summary: Get project by its id.
+      description: Get project by its id.
+      tags: [Project]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        200:
+          description: Success.
+
+  /project/all:
+    get:
+      summary: Get all projects.
+      description: Get all projects.
+      tags: [Project]
+      responses:
+        200:
+          description: Success. Value of count is total mini products (not products) !!!

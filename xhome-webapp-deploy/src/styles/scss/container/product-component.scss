@@ -1,0 +1,86 @@
+.dialog-container-list-materials {
+  .dialog-title {
+    h2 {
+      display: flex;
+      justify-content: space-between;
+      height: 40px;
+      .form-filter-search {
+        display: flex;
+        button {
+          margin-right: 20px;
+        }
+      }
+      .btn-close {
+        cursor: pointer;
+      }
+    }
+  }
+  .dialog-content {
+    max-height: calc(100% - 64px);
+    height: 600px;
+  }
+  .dialog-actions-list-materials {
+    justify-content: space-between;
+    padding: 8px 24px;
+    .btn-quick-creation {
+      background-color: #22953c;
+      margin-right: 20px;
+    }
+    .btn-select-materials {
+      background-color: #d4976c;
+    }
+    .MuiButton-label {
+      color: #fff;
+    }
+    .btn-action-right {
+      .btn-complete {
+        margin-right: 20px;
+      }
+    }
+  }
+}
+
+.mobile-list-materials {
+  .MuiFab-extended {
+    position: fixed;
+    bottom: 70px;
+    right: 10px;
+  }
+  .block-btn-action {
+    button {
+      //   min-width: 125px;
+      min-width: 100px;
+    }
+    .btn-save {
+      background-color: #22953c;
+      .MuiButton-label {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.popover-filter-container {
+  .MuiPopover-paper {
+    padding: 15px 12px;
+    background-color: #e5e5e5;
+  }
+  .popover-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .popover-content {
+    .input-filter {
+      margin-top: 15px;
+    }
+  }
+  .popover-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    button {
+      width: 120px;
+    }
+  }
+}

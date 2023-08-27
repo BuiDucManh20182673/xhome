@@ -1,0 +1,17 @@
+.container {
+  .type-col {
+    width: 30%;
+    min-width: 275px;
+  }
+  .segment-col {
+    width: 100%;
+    min-width: 275px;
+  }
+}
+
+@media (max-width: 768px) {
+  .type-col,
+  .segment-col {
+    width: 100% !important;
+  }
+}

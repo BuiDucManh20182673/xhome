@@ -1,0 +1,28 @@
+.dialog-container-select-materials {
+    .dialog-title-select {
+        &-head {
+            display: flex;
+            justify-content: space-between;
+            .txt-head {
+                font-weight: bold;
+                color: #707070;
+            }
+        }
+    }
+    .dialog-content-select {
+        max-height: calc(100% - 64px);
+        height: 600px;
+    }
+    .dialog-actions-select {
+        display: flex;
+        justify-content: flex-end;
+        // height: 42px;
+        padding: 8px 24px;
+        .btn-complete {
+            background-color: #22953c;
+        }
+        .MuiButton-label {
+            color: #fff;
+        }
+    }
+}

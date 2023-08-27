@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        async function callAPI() {
+            let options = {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6ZmFsc2UsInVzZXJuYW1lIjoiMjJhYSIsImlhdCI6MTYwNTc3ODQwM30.DU8dtK2SvGuxMniziJgTmTy_jOaOstshBt9iOd4gzto"
+                },
+                body: JSON.stringify({
+                    "username": "22aa",
+                    "password": "",
+                })
+            }
+            let url = "http://localhost:3001/api/auth"
+            try {
+
+                let response = await fetch(url, options);
+                console.log(response)
+                let json = await response.json();
+                console.log(json)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    </script>
+</head>
+<body>
+    <button onclick="callAPI()">Click</button>
+</body>
+</html>

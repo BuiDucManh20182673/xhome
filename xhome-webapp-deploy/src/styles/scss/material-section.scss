@@ -1,0 +1,226 @@
+.main-content {
+  margin-top: 20px;
+  .material-col {
+    min-width: 220px;
+    width: 20%;
+  }
+  .product-col {
+    // margin-left: 20px;
+    // border: 1px solid #707070;
+    // border-radius: 5px;
+    width: 80%;
+    .MuiPaper-rounded {
+      //height: 100%;
+      height: 100%;
+      min-height: 180px;
+      position: relative;
+      // width: 100%;
+      padding: 10px;
+    }
+    @media (max-width: 768px) {
+      .MuiPaper-rounded {
+        padding: 3px;
+      }
+    }
+    @media (max-width: 500px) {
+      .MuiPaper-rounded {
+        padding: 10px;
+        width: 100%;
+      }
+    }
+    .MuiTabPanel-root {
+      padding: 0;
+      .table-list-product {
+        margin: 0;
+      }
+    }
+    table {
+      padding: 20px;
+    }
+    .my-table {
+      padding: 2%;
+    }
+    .table-list-product table {
+      min-width: 768px;
+    }
+    .tab-list {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      position: relative;
+      z-index: 9;
+      box-shadow: 0 1px 10px -9px rgba(0, 0, 0, 0.3);
+
+      .MuiTabs-flexContainer {
+        & > :last-child {
+          position: absolute;
+          right: 20px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+    .tab-panel {
+      // min-height: 480px;
+      max-height: calc(100vh * 520 / 768);
+      overflow: auto;
+      overflow-x: hidden;
+      // margin-bottom: 67px;
+    }
+    .block-action {
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 12px 15px;
+      background-color: #fff;
+      &-block {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        .btn-add-new {
+          background-color: #22953c;
+          .MuiButton-label {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  .add-segment-wrap {
+    width: 200px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    & > .MuiOutlinedInput-adornedEnd {
+      padding: 0 0 0 15px;
+      & > input {
+        padding: 0;
+      }
+    }
+    button.add-btn {
+      box-shadow: unset;
+      background-color: transparent;
+      &:hover {
+        background-color: transparent;
+        box-shadow: unset;
+      }
+    }
+  }
+  .blank-tab {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    min-height: 48px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    .quick-add-segment {
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+  }
+}
+.container {
+  .btn-back {
+    display: none;
+  }
+  .btn-back-account {
+    display: block;
+    position: absolute;
+    top: 35px;
+    right: 25px;
+  }
+}
+@media (max-width: 1440px) {
+  .content-container .container .main-content {
+    // flex-direction: column;
+    .material-col {
+      width: 30%;
+      // width: 25%;
+    }
+    .product-col {
+      width: 100%;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    position: relative;
+    .btn-back,
+    .btn-back-supplier,
+    .btn-back-account {
+      display: block;
+      position: absolute;
+      top: 35px;
+      right: 25px;
+    }
+  }
+  .material-col {
+    width: 100% !important;
+    // width: 25%;
+  }
+}
+@media (max-width: 500px) {
+  .content-container .container .main-content {
+    flex-direction: column;
+  }
+}
+@media (max-width: 1024px) {
+  .product-col {
+    // .search-input {
+    //   display: none;
+    // }
+  }
+  .tab-list {
+    .MuiTabs-flexContainer {
+      .MuiTab-root {
+        min-width: 100px;
+      }
+    }
+    .PrivateTabIndicator-colorSecondary-7 {
+      width: 100px !important;
+    }
+  }
+}
+@media (max-width: 768px) {
+  // .main-content {
+  .material-col {
+    .add-input {
+      width: 100%;
+    }
+  }
+  .product-col {
+    width: 65%;
+
+    .tab-panel {
+      padding: 24px 0;
+    }
+  }
+  // }
+}
+@media (max-width: 500px) {
+  .main-content {
+    display: block !important;
+    .material-col {
+      width: 100% !important;
+    }
+    .product-col {
+      width: 100%;
+      table {
+        padding: 0;
+      }
+      .tab-list {
+        .MuiTabs-fixed {
+          padding-top: 55px;
+        }
+        .add-segment-wrap {
+          top: 30% !important;
+          left: 50%;
+          width: 385px;
+          transform: translate(-50%, -50%) !important;
+          .add-segment-input {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

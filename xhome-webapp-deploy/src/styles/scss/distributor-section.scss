@@ -1,0 +1,83 @@
+.main-content {
+  margin-top: 20px;
+  .distributor-col {
+    width: 100%;
+    // min-width: 600px;
+    .wrap-table {
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      thead,
+      tbody,
+      tfoot {
+        // margin: 10px;
+      }
+      .cell-header{
+        cursor: pointer;
+        &:hover{
+          .arrow{
+            opacity: 1;
+          }
+        }
+        .arrow, .display-arrow{
+          margin-bottom: 6px; 
+          transform: scale(0.8) translateX(-10px);
+          color: #333;
+          opacity: 0;
+          transition: 0.3s;
+        }
+        .display-arrow{
+          opacity: 1;
+          transition: 0.3s;
+        }
+      }
+    }
+  }
+}
+.container{
+  .btn-create-project{
+    color: #000000;
+    padding: 10px;
+    background-color: #e0e0e0;
+    transition: 0.3s;
+    &:hover{
+      color: white;
+      background-color: #a53f42;
+    }
+  }
+}
+@media (max-width: 1024px) {
+  .distributor-col {
+    min-width: 100% !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .supplier-col {
+    width: 100% !important;
+  }
+
+  .cell-title {
+    display: none !important;
+  }
+  .row-content {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    .cell-name,
+    .cell-number,
+    .cell-email {
+      width: 100%;
+      display: block;
+    }
+    .cell-action {
+      display: table-cell;
+    }
+  }
+  .input-add-wrap {
+    display: flex !important;
+    flex-direction: column;
+    gap: 10px;
+    .cell-input-add {
+      width: 100%;
+    }
+  }
+}

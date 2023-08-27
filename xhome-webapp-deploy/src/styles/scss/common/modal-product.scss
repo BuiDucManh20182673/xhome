@@ -1,0 +1,197 @@
+.container-add-new-materials {
+  .title-add-new-materials {
+    border-bottom: 1px solid #707070;
+    padding: 14px 24px;
+    .title-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      h6 {
+        font-weight: bold;
+        color: #707070;
+      }
+    }
+  }
+  .content-add-new-materials {
+    padding: 1px 42px;
+    .wrap-block-add-new-materials {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      .block-input-info {
+        // margin-top: 12px;
+        .form-input {
+          margin-bottom: 15px;
+          p {
+            margin-bottom: 3px;
+            font-size: 18px;
+          }
+          .name-product {
+            width: 100%;
+          }
+          .input-show-modal {
+            .MuiOutlinedInput-adornedEnd {
+              padding-right: 0px;
+            }
+            // svg {
+            //   padding: 5px 5px 5px 15px;
+            // }
+          }
+          #require-icon{
+            color: red;
+          }
+        }
+      }
+      .block-img {
+        .block-add-img {
+          &-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            p {
+              margin-right: 30px;
+              font-size: 18px;
+            }
+            button {
+              padding: 6px 0px;
+              font-size: 13px;
+            }
+          }
+          &-show-img {
+            margin-top: 10px;
+            width: 225px;
+            height: 100%;
+            .img-product-new {
+              border: 1px solid #707070;
+              border-radius: 3px;
+              width: 220px;
+              height: 220px;
+              object-fit: cover;
+              margin-top: 10px;
+            }
+          }
+        }
+      }
+      .block-add-img + .block-add-img {
+        margin-top: 20px;
+      }
+    }
+    .form-note {
+      .note-textarea {
+        width: 100%;
+      }
+      .form-input {
+        p {
+          margin-bottom: 3px;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .actions-add-new-materials {
+    button span {
+      color: #fff;
+    }
+    .btn-quick-creation {
+      background-color: #22953c;
+    }
+  }
+  @media (max-width: 500px) {
+    .content-add-new-materials {
+      .wrap-block-add-new-materials {
+        flex-direction: column;
+        .block-img {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          & > :first-child {
+            // padding-right: 10px;
+          }
+          & > :last-child {
+            // padding-left: 10px;
+            margin-top: auto;
+          }
+          .block-add-img {
+            p {
+              margin-right: auto;
+              font-size: 16px;
+            }
+            &-show-img {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-direction: column;
+              margin: 10px auto;
+            }
+          }
+        }
+      }
+      .block-input-info {
+        margin-top: 20px;
+        .form-input {
+          .input-show-modal {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+.mobile-container {
+  .content-add-new-materials {
+    .wrap-block-add-new-materials {
+      flex-direction: column-reverse;
+      .block-img {
+        display: flex;
+        justify-content: space-around;
+        & > :first-child {
+          padding-right: 10px;
+        }
+        & > :last-child {
+          padding-left: 10px;
+          margin-top: auto;
+        }
+        .block-add-img {
+          p {
+            margin-right: auto;
+            font-size: 16px;
+          }
+          &-show-img {
+            width: auto;
+            height: auto;
+          }
+        }
+      }
+    }
+    .block-input-info {
+      margin-top: 20px;
+      .form-input {
+        .input-show-modal {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-container
+    .content-add-new-materials
+    .wrap-block-add-new-materials
+    .block-img {
+    justify-content: space-evenly;
+  }
+  .container-add-new-materials
+    .content-add-new-materials
+    .wrap-block-add-new-materials
+    .block-input-info {
+    display: flex;
+    flex-wrap: wrap;
+    .form-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 2%;
+    }
+  }
+}

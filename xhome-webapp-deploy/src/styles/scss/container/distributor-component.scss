@@ -1,0 +1,78 @@
+// @import "material-component.scss";
+
+.container .my-table {
+  .input-add:hover:not(.Mui-disabled):before {
+    border-bottom: none !important;
+  }
+  .input-add-wrap {
+    // background: #a53f42;
+    .input-add {
+      margin-right: 20px;
+      background-color: #fff;
+      &:before,
+      &:after {
+        border-bottom: none;
+      }
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+    }
+  }
+  .search-input {
+    display: flex;
+  }
+  .btn-add--form {
+    white-space: nowrap;
+  }
+  .pagination-component {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  td.MuiTableCell-footer.cell-btn-add {
+    color: #fff;
+    .btn-add--form {
+      background-color: #a53f42;
+      & > span {
+        color: inherit;
+      }
+    }
+  }
+}
+  .btn {
+    background-color: black;
+    
+  }
+  .btn-edit {
+    box-shadow: none;
+    &:hover {
+      color: #22953c;
+    }
+  }
+  .btn.btn-update {
+    color: #fff;
+    background-color: #22953c;
+    filter: unset;
+  }
+  .btn-delete {
+    box-shadow: none;
+    &:hover {
+      color: #f50057;
+    }
+  }
+  .selected {
+    background: #a53f42;
+    color: #fff;
+    &:hover {
+      background: #a53f42 !important;
+    }
+    .btn-wrap {
+      .btn {
+        color: #e0e0e0;
+      }
+      .btn-edit:hover {
+        color: #22953c;
+      }
+      .btn-delete:hover {
+        color: #f50057;
+      }
+    }
+  }

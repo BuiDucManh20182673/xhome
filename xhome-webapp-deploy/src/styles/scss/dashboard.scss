@@ -1,0 +1,211 @@
+.dashboard-container {
+  display: flex;
+  height: inherit;
+  .side-bar-container {
+    width: 20%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    overflow-y: auto;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    /* width */
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+    /* Track */
+    &::-webkit-scrollbar-track {
+    }
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+    }
+    &::-webkit-scrollbar-thumb:hover {
+    }
+    .logo {
+      display: block;
+      text-align: center;
+      padding: 15px 0;
+      img {
+        max-width: 100%;
+      }
+    }
+    #iconLogo{
+      display: inline-block;
+      padding-right: 10px  ;
+      height: 24px;
+    }
+    .info-account {
+      display: none;
+    }
+    a.logout {
+      color: #000000;
+      // font-weight: 600;
+    }
+    a.fullname{
+      color: #000000;
+      font-weight: 600;
+      //background-color: black;
+    }
+    a.nav-link {
+      display: block;
+      padding: 20px;
+    }
+
+    a.nav-link:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+      transition: background-color 0.5s;
+    }
+
+    a.nav-link.active {
+      background-color: #a53f42;
+      color: white;
+    }
+    a.logout:hover {
+      color: #fff;
+      font-weight: 600;
+      background-color: black;
+    }
+  }
+  .nav-movile-header {
+    display: none;
+  }
+  .content-container {
+    width: 80%;
+    margin-left: 20%;
+    overflow: auto;
+  }
+
+  @media (max-width: 768px) {
+    display: block;
+    .side-bar-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #fff;
+      width: 275px;
+      height: 100%;
+      z-index: 102;
+      transform: translateX(-100%);
+      transition: transform 1s;
+      z-index: 1000;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .side-bar-container.open {
+      transform: translateX(0%);
+    }
+    .side-bar-container.open + .side-bar-mobile-mask {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      opacity: 0.5;
+      background: darkgray;
+      z-index: 101;
+    }
+    .nav-movile-header {
+      display: flex;
+      width: 100%;
+      background: #a53f42;
+      position: sticky;
+      top: 0;
+      padding: 15px 20px;
+      box-sizing: border-box;
+      justify-content: flex-start;
+      z-index: 10;
+      .logo-head {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        img {
+          width: 100px;
+          filter: brightness(10);
+        }
+      }
+    }
+    .nav-movile-header button {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    .nav-movile-header button:hover,
+    button:active,
+    button:focus {
+      outline: none;
+    }
+    .content-container {
+      width: 100%;
+      margin-left: 0;
+    }
+    .logo {
+      display: none !important;
+    }
+    a.logout {
+      display: none !important;
+    }
+    a.fullname {
+      display: none !important;
+    }
+    .info-account {
+      display: flex !important;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 15px 0px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      &-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        img {
+          width: 100%;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+      &-info {
+        .name-account {
+          font-weight: 600;
+          color: #a53f42;
+          margin-top: 0;
+        }
+        .access-account {
+          text-transform: uppercase;
+          font-size: 14px;
+        }
+        .phone-account {
+          color: #a53f42;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+// Common styles
+body {
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+// Layout
+.container {
+  max-width: 100%;
+  padding: 15px;
+  .main-content {
+    display: flex;
+    margin-left: -10px;
+    margin-right: -10px;
+    .my-col {
+      padding: 10px;
+    }
+  }
+  @media (max-width: 768px){
+    .main-content{
+      flex-direction: column;
+    }
+  }
+}

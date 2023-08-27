@@ -1,0 +1,200 @@
+.catalog-col {
+  width: 100%;
+  min-width: 600px;
+  .search-input {
+    // max-width: 300px;
+    width: 100%;
+    margin-left: auto;
+  }
+  @media (max-width: 768px) {
+    min-width: unset;
+    .my-table {
+      overflow: auto;
+    }
+    table.MuiTable-root {
+      overflow: hidden;
+    }
+  }
+}
+
+.container-product-list {
+  width: 100%;
+  .product-list-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    .action-right {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 10%;
+      right: 4%;
+      .search-input {
+        margin-bottom: 0;
+        margin-left: 20px;
+      }
+    }
+    @media (max-width: 425px){
+      .action-right{
+        display: block;
+        position: relative;
+      }
+    }
+  }
+  @media (max-width: 425px){
+    .product-list-head{
+      display: block;
+    }
+  }
+  .product-list-content {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    margin-top: 20px;
+    // justify-content: center;
+    .item-product-catalog {
+      display: inline-flex;
+      padding: 12px 10px;
+      align-items: center;
+      .img-product {
+        width: calc(100vw * 147 / 1366);
+        height: calc(100vw * 147 / 1366);
+        min-width: 80px;
+        min-height: 80px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 4px;
+      }
+      @media (max-width: 500px) {
+        .img-product {
+          min-width: 120px;
+          min-height: 120px;
+        }
+      }
+      .info-product {
+        padding-left: 15px;
+        p {
+          width: calc(100vw * 147 / 1366);
+          font-size: calc(100vw * 12 / 1366);
+          margin: 10px 0;
+        }
+        @media (max-width: 768px) {
+          p {
+            font-size: 10px;
+          }
+        }
+        @media (max-width: 500px) {
+          p {
+            font-size: 12px;
+            width: 100px;
+          }
+        }
+      }
+      @media (max-width: 500px) {
+        .info-product {
+          width: 100%;
+        }
+      }
+      .action-product {
+        display: flex;
+        justify-content: space-between;
+        @media (max-width: 500px) {
+          justify-content: flex-end;
+        }
+        button {
+          width: calc(100vw * 75 / 1366);
+        }
+      }
+    }
+    @media (max-width: 500px) {
+      .item-product-catalog {
+        width: 100%;
+        font-size: 16px;
+      }
+    }
+  }
+  .product-list-footer {
+    margin-top: 20px;
+  }
+}
+@media (max-width: 425px) {
+  .search-input {
+    max-width: 100%;
+  }
+  .table-head-catalog {
+    display: none !important;
+  }
+  .row-content {
+    .cell-image {
+      // max-width: 116px;
+      // min-width: 116px;
+    }
+  }
+  .cell-content {
+    display: inline-flex !important;
+    width: 100%;
+  }
+  .cell-action {
+    .action-catalog {
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-end;
+    }
+  }
+}
+
+.container-handle-product {
+  .dialog-content {
+    .block-img {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .form-edit {
+      display: flex;
+      .img-product {
+        width: 200px;
+        height: 200px;
+        min-width: 200px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+      .info-product {
+        margin-left: 20px;
+        .form-input {
+          display: flex;
+          align-items: center;
+          p {
+            width: 70px;
+          }
+          @media (max-width: 550px){
+            p{
+              width: 60px;
+              font-weight: bold;
+            }
+          }
+        }
+        .btn-actions {
+          width: 100%;
+          justify-content: flex-end;
+          margin-top: 10px;
+          button + button {
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+    @media (max-width: 550px){
+      .form-edit{
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+}
